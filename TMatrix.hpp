@@ -1,76 +1,93 @@
 #ifndef __T_MATRIX__
 #define __T_MATRIX__
 #include <cstring>
+#include <algorithm>
+#include <vector>
+
+using std::vector;
 
 template<class T>
 class TMatrix {
 	private:
-		T * matrix;
-		unsigned int N;
-		unsigned int computeSize();
-		unsigned int computePosition(unsigned int x, unsigned int y);
+		vector<T> matrix;
+		size_t computePosition(size_t x, size_t y);
 	public:
-		TMatrix(unsigned int N);
-		TMatrix(unsigned int N, T value); //Initialize all values
+		explicit TMatrix(size_t N);
+		TMatrix();
+		size_t size;
+		size_t computeSize();
+		TMatrix(size_t N, T value); //Initialize all values
 		~TMatrix();
-		T get(unsigned int x, unsigned int y);
-		void set(unsigned int x, unsigned int y, T value);
-
+		T get(size_t x, size_t y);
+		const T& get (size_t x, size_t y) const;
+		void set(size_t x, size_t y, T value);
+		void setSize(size_t x);
+		void reserve(size_t x);
 		//Overloading operators
-		T operator()(unsigned int x, unsigned int y) { return get(x,y); }
-		void operator()(unsigned int x, unsigned int y, T value) { set(x,y,value); }
-
-		//It would be nice to overload '[][]' and '=' operators
+		T operator()(size_t x, size_t y) { return get(x,y); }
+		void operator()(size_t x, size_t y, T value) { set(x,y,value); }
+		auto begin() { return matrix.begin(); };
+		auto end() { return matrix.end(); };
 };
 
 
-//Code
+template<class T>
+TMatrix<T>::TMatrix() : matrix(vector<T>()), size{0}
+{ }
 
 template<class T>
-TMatrix<T>::TMatrix(unsigned int N) {
-	this->N=N;
-	matrix = new T[computeSize()];
+TMatrix<T>::TMatrix(const size_t N) : matrix(vector<T>()), size{N} 
+{
+	matrix.reserve((N*N+N)/2);
 }
 
 template<class T>
-TMatrix<T>::TMatrix(unsigned int N, T value) {
-	this->N=N;
-	unsigned int size = computeSize();
-	matrix = new T[size];
-	std::fill(matrix,matrix+size,value);
+TMatrix<T>::TMatrix(const size_t N, const T value) : matrix(vector<T>()), size{N}
+{
+	matrix.resize((N*N+N)/2);
+	std::fill(matrix.begin(),matrix.end(), value);
 }
 
 template<class T>
 TMatrix<T>::~TMatrix() {
-	delete[] matrix;
+	vector<T>().swap(matrix);
 }
 
 template<class T>
-unsigned int TMatrix<T>::computeSize() {
-	return (N*N+N)/2;
+size_t TMatrix<T>::computeSize() {
+	return (size*size+size)/2;
 }
 
 template<class T>
-unsigned int TMatrix<T>::computePosition(unsigned int x, unsigned int y) {
+size_t TMatrix<T>::computePosition(size_t x, size_t y) {
 	if (y > x) {
-		unsigned int aux = x;
+		size_t aux = x;
 		x=y;
 		y=aux;
 	}
-	unsigned int position = (x*x+x)/2+y;
+	size_t position = (x*x+x)/2+y;
+	return position;
 }
 
-
 template<class T>
-T TMatrix<T>::get(unsigned int x, unsigned int y) {
+T TMatrix<T>::get(const size_t x, const size_t y) {
 	return matrix[computePosition(x,y)];
 }
 
 template<class T>
-void TMatrix<T>::set(unsigned int x, unsigned int y, T value) {
+void TMatrix<T>::set(const size_t x, const size_t y, T value) {
 	matrix[computePosition(x,y)] = value;
 }
 
+template<class T>
+void TMatrix<T>::setSize(const size_t x){
+	size = x;
+}
 
+template<class T>
+void TMatrix<T>::reserve(const size_t x){
+	size = x;
+	matrix.reserve(x);
+}
 
 #endif
