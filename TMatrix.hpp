@@ -30,7 +30,6 @@ class TMatrix {
 		auto end() { return matrix.end(); };
 };
 
-
 template<class T>
 TMatrix<T>::TMatrix() : matrix(vector<T>()), size{0}
 { }
@@ -49,17 +48,20 @@ TMatrix<T>::TMatrix(const size_t N, const T value) : matrix(vector<T>()), size{N
 }
 
 template<class T>
-TMatrix<T>::~TMatrix() {
+TMatrix<T>::~TMatrix() 
+{
 	vector<T>().swap(matrix);
 }
 
 template<class T>
-size_t TMatrix<T>::computeSize() {
+size_t TMatrix<T>::computeSize() 
+{
 	return (size*size+size)/2;
 }
 
 template<class T>
-size_t TMatrix<T>::computePosition(size_t x, size_t y) {
+size_t TMatrix<T>::computePosition(size_t x, size_t y) 
+{
 	if (y > x) {
 		size_t aux = x;
 		x=y;
@@ -70,22 +72,26 @@ size_t TMatrix<T>::computePosition(size_t x, size_t y) {
 }
 
 template<class T>
-T TMatrix<T>::get(const size_t x, const size_t y) {
+T TMatrix<T>::get(const size_t x, const size_t y) 
+{
 	return matrix[computePosition(x,y)];
 }
 
 template<class T>
-void TMatrix<T>::set(const size_t x, const size_t y, T value) {
+void TMatrix<T>::set(const size_t x, const size_t y, T value) 
+{
 	matrix[computePosition(x,y)] = value;
 }
 
 template<class T>
-void TMatrix<T>::setSize(const size_t x){
+void TMatrix<T>::setSize(const size_t x)
+{
 	size = x;
 }
 
 template<class T>
-void TMatrix<T>::reserve(const size_t x){
+void TMatrix<T>::reserve(const size_t x)
+{
 	size = x;
 	matrix.reserve(x);
 }

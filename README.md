@@ -1,13 +1,13 @@
 # TriangularMatrix
 (Forked from https://github.com/fylux/TriangularMatrix)
 
-This is a shamelessly simple, minimalistic, memory efficient implementation of a triangular matrix in C++.
+This is a shamelessly simple, minimalistic, memory efficient implementation of a symmetric triangular matrix in C++.
 
 ## What is/Why use a triangular matrix?
 [The author of the original TMatrix class can explain it better than I do.](https://fylux.github.io/2017/03/07/Symmetric-Triangular-Matrix/)
 
 ## Why this triangular matrix?
-Surprisingly enough, to my knowledge, there are no other simple and modern triangular matrix implementations apart from this one. The usual C++ solve-it-all library, Boost, ties a really, really old, confusing and bloated matrix implementation to the whole uBLAS module. [The page itself strongly suggests you shouldn't use the library because it's outdated](https://www.boost.org/doc/libs/1_71_0/libs/numeric/ublas/doc/index.html), and that was written in 2012 (!). Other symmetrical matrix implementations suffer from similar problems: they're either vastly outdated, bloated with whole linear algebra libraries you have to drag to your project even though you're never gonna use, or are outright not optimized and will take the space of a whole matrix.
+Surprisingly enough, to my knowledge, there are no other simple and modern triangular matrix implementations apart from this one. The usual C++ solve-it-all library, Boost, ties a really, really old, confusing and bloated matrix implementation to the whole uBLAS module. [The page itself strongly suggests you shouldn't use the library because it's outdated](https://www.boost.org/doc/libs/1_71_0/libs/numeric/ublas/doc/index.html), and that was written in 2012 (!). Other symmetric matrix implementations suffer from similar problems: they're either vastly outdated, bloated with whole linear algebra libraries you have to drag to your project even though you're never gonna use, or are outright not optimized and will take the space of a whole matrix.
 
 ## What does this fork add?
 The biggest difference between this version and fylux's one is that the static C-style arrays have been replaced by the more flexible C++ templated vectors. This means it's now possible to create extremely big, dynamic matrices (as big as your computer's memory, really) without blowing up the heap when trying to allocate memory.
