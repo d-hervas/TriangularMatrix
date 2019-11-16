@@ -17,7 +17,7 @@ It also adds a few optimization tricks, a more modern syntax, and some useful me
 
 The code is probably not the cleanest, but it's simple enough that it should be self-explanatory.
 
-## Hey, wouldn't it be cool if you added the bracket operat...
-[Nope, ](https://isocpp.org/wiki/faq/operator-overloading#matrix-subscript-op) [it's really](https://isocpp.org/wiki/faq/operator-overloading#matrix-array-of-array) [ not worth it.](https://isocpp.org/wiki/faq/operator-overloading#matrix-c-style-subscript)**
+## Hey, wouldn't it be cool if you supported the bracket operat...
+**[Nope, ](https://isocpp.org/wiki/faq/operator-overloading#matrix-subscript-op) [it's really](https://isocpp.org/wiki/faq/operator-overloading#matrix-array-of-array) [ not worth it.](https://isocpp.org/wiki/faq/operator-overloading#matrix-c-style-subscript)**
 
 TLDR: It's really messy to implement and even if you get it to work, it'll very likely be slower than using the getter/setter. Don't bother. Trust me, it's not like I tried to do it or anything, and when I got it to work it really was slower and the class had doubled in lines of code, haha. It would've been funny if that had been the case though, right? Haha.
